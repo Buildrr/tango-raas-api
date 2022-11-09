@@ -400,30 +400,49 @@ class TangoCard extends TangoCardBase {
      *
      * @return array created order response
      */
-    public function placeOrder($customerIdentifier,$accountIdentifier,$amount,$utid,$sendEmail,$recipientEmail,$recipientFirstName,$recipientLastName=null,$campaign=null,$emailSubject=null,$message=null,$notes=null,$senderEmail=null,$senderFirstName=null,$senderLastName=null,$externalRefID=null) {
-        $data =[
-        'accountIdentifier'=>$accountIdentifier,
-        'customerIdentifier'=>$customerIdentifier,
-        'amount'=>$amount,
-        'campaign'=>$campaign,
-        'emailSubject'=>$emailSubject,
-        'externalRefID'=>$externalRefID,
-        'message'=>$message,
-        'notes'=>$notes,
-        'utid'=>$utid,
-        'sendEmail'=>$sendEmail,
-        'recipient'=>[
-        'email'=>$recipientEmail,
-        'firstName'=>$recipientFirstName,
-        'lastName'=>$recipientLastName
-        ],
-        'sender'=>[
-        'email'=>$senderEmail,
-        'firstName'=>$senderFirstName,
-        'lastName'=>$senderLastName
-        ]
+    public function placeOrder(
+        $customerIdentifier,
+        $accountIdentifier,
+        $amount,
+        $utid,
+        $etid,
+        $sendEmail,
+        $recipientEmail,
+        $recipientFirstName,
+        $recipientLastName=null,
+        $campaign=null,
+        $emailSubject=null,
+        $message=null,
+        $notes=null,
+        $senderEmail=null,
+        $senderFirstName=null,
+        $senderLastName=null,
+        $externalRefID=null
+    ) {
+        $data = [
+            'accountIdentifier'=>$accountIdentifier,
+            'customerIdentifier'=>$customerIdentifier,
+            'amount'=>$amount,
+            'campaign'=>$campaign,
+            'emailSubject'=>$emailSubject,
+            'externalRefID'=>$externalRefID,
+            'message'=>$message,
+            'notes'=>$notes,
+            'utid'=>$utid,
+            'etid' => $etid,
+            'sendEmail'=>$sendEmail,
+            'recipient'=>[
+                'email'=>$recipientEmail,
+                'firstName'=>$recipientFirstName,
+                'lastName'=>$recipientLastName
+            ],
+            'sender'=>[
+                'email'=>$senderEmail,
+                'firstName'=>$senderFirstName,
+                'lastName'=>$senderLastName
+            ]
         ];
-        return parent::_requestData('post','orders',false,false,$data);
+        return parent::_requestData('post', 'orders', false, false, $data);
     }
 
      /**

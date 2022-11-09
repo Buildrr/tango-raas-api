@@ -38,7 +38,7 @@ class TangoCardBase {
         CURLOPT_USERAGENT => 'tango-raas-php-2.0',
         CURLOPT_SSL_VERIFYPEER => true,
         CURLOPT_RETURNTRANSFER => TRUE
-        );
+    );
 
 
     /**
@@ -48,30 +48,30 @@ class TangoCardBase {
     protected static $_appModes = array(
         'sandbox' => 'https://integration-api.tangocard.com/raas',
         'production' => 'https://api.tangocard.com/raas'
-        );
+    );
     /**
      * @staticvar array $_resources contains available tangocard api's url
      *
      */
     private static $_resources = [
 
-    'get'=>[
-    'customers'=>['accounts'],
-    'accounts' => [],
-    'creditCards'=>[],
-    'catalogs'=>[],
-    'orders'=>['resends']
-    ],
+        'get'=>[
+            'customers'=>['accounts'],
+            'accounts' => [],
+            'creditCards'=>[],
+            'catalogs'=>[],
+            'orders'=>['resends']
+        ],
 
-    'post'=>[
-    'customers'=>['accounts'],
-    'accounts' => [],
-    'creditCards'=>[],
-    'creditCardDeposits'=>[],
-    'creditCardUnregisters'=>[],
-    'catalogs'=>[],
-    'orders'=>['resends']
-    ]
+        'post'=>[
+            'customers'=>['accounts'],
+            'accounts' => [],
+            'creditCards'=>[],
+            'creditCardDeposits'=>[],
+            'creditCardUnregisters'=>[],
+            'catalogs'=>[],
+            'orders'=>['resends']
+        ]
 
     ];
 
@@ -99,7 +99,6 @@ protected function _validateResourceAndSubResource($httpMethod,$resource,$subRes
         }else{
           throw new TangoCardRequestTypeInvalidException();
       }
-
   }
 
     /*
@@ -130,6 +129,7 @@ protected function _validateResourceAndSubResource($httpMethod,$resource,$subRes
     {
         self::_validateInfo($httpMethod,$resource,$subResource);
         $url = self::_createUrl($resource, $resourceId, $subResource);
+
         if(strtolower($httpMethod) == 'get'){
             return self::tangoCardRequest($url);
         }else if(strtolower($httpMethod) == 'post'){
@@ -158,7 +158,7 @@ protected function _validateResourceAndSubResource($httpMethod,$resource,$subRes
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             'Content-Type: application/json',
             'Authorization:Basic ' . base64_encode($this->platformName . ':' . $this->platformKey)
-            ));
+        ));
         $result = curl_exec($ch);
         $httpStatus = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $error = curl_error($ch);
